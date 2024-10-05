@@ -23,7 +23,8 @@
         <a-plane position="5 -5 -5" rotation="-90 0 0" width="50" height="50" color="#7BC8A4"></a-plane>
 
         <!-- Initial Box (can be used as a placeholder or reference) -->
-        
+        <a-box id="initialBox" position="5 -5.5 -8" rotation="0 45 0" color="#4CC3D9" shadow></a-box>
+
         <!-- Camera Entity -->
         <a-entity camera look-controls position="0 1.6 0" near="0.01" far="1000" fov="80"></a-entity>
     </a-scene>
@@ -52,7 +53,7 @@
         // Event listener to add a 3D object at the clicked position
         sceneEl.addEventListener('click', function (event) {
             // Calculate the position where the user clicked in the AR space
-            const clickPosition = { x: 0, y: 1, z: -3 }; // Adjust this based on your environment
+            const clickPosition = { x: 10, y: -5, z: -3 }; // Adjust this based on your environment
             create3DObject(clickPosition);
         });
     </script>

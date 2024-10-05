@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markerless AR with Dynamic Object Instantiation</title>
+    <!-- Include A-Frame and AR.js -->
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.3.2/aframe/build/aframe-ar.js"></script>
+    <style>
+        body { margin: 0; overflow: hidden; }
+    </style>
+</head>
+<body>
+    <!-- A-Frame Scene with AR.js -->
+    <a-scene
+        embedded
+        arjs="sourceType: webcam; debugUIEnabled: false;"
+        vr-mode-ui="enabled: false;"
+        renderer="logarithmicDepthBuffer: true;">
+
+        <!-- Static ground plane for objects placement -->
+        <a-plane position="0 0 0" rotation="-90 0 0" width="50" height="50" color="#7BC8A4"></a-plane>
+
+        <!-- Initial Box (can be used as a placeholder or reference) -->
+        <a-box id="initialBox" position="0 0.5 -3" rotation="0 45 0" color="#4CC3D9" shadow></a-box>
+
+        <!-- Camera Entity -->
+        <a-entity camera look-controls></a-entity>
+    </a-scene>
+
+    <!-- JavaScript to Handle Dynamic Instantiation -->
+    <script>
+        // Select the scene element
+        const sceneEl = document.querySelector('a-scene');
+
+        // Function to create a new 3D box and add it to the scene
+        function create3DObject(position) {
+            // Create a new box element
+            const newBox = document.createElement('a-box');
+            
+            // Set position, rotation, and other attributes
+            newBox.setAttribute('position', position);
+            newBox.setAttribute('rotation', '0 45 0');
+            newBox.setAttribute('color', '#EF2D5E');
+            newBox.setAttribute('shadow', 'true');
+
+            // Append the box to the scene
+            sceneEl.appendChild(newBox);
+        }
+
+        // Event listener to add a 3D object at the clicked position
+        sceneEl.addEventListener('click', function (event) {
+            // Calculate the position where the user clicked in the AR space
+            const clickPosition = { x: 0, y: 1, z: -3 }; // Adjust this based on your environment
+            create3DObject(clickPosition);
+        });
+    </script>
+</body>
+</html>
